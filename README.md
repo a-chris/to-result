@@ -82,7 +82,7 @@ class MyClass
 end
 ```
 
-now you can always use `ToResult` all the time you wanted to use `Success`, `Failure` or `Try` but with a more handy interface and consistent behaviour.
+now you can always use `ToResult` all the time you wanted to use `Success`, `Failure` or `Try` but with a more convenient interface and consistent behaviour.
 
 Look at this:
 
@@ -103,7 +103,7 @@ ToResult([YourCustomError]) { yield Failure(YourCustomError.new('error code')) }
 # returns Failure(YourCustomError('error code'))
 
 ToResult([ArgumentError]) { yield Failure(YourCustomError.new('error code')) }
-# raises StandardError('error code')
+# raises YourCustomError('error code')
 ```
 
 ## Roadmap
