@@ -98,6 +98,12 @@ ToResult { yield Failure('error code') }
 
 ToResult { yield Failure(StandardError.new('error code')) }
 # returns Failure(StandardError('error code'))
+
+ToResult([YourCustomError]) { yield Failure(YourCustomError.new('error code')) }
+# returns Failure(YourCustomError('error code'))
+
+ToResult([ArgumentError]) { yield Failure(YourCustomError.new('error code')) }
+# raises StandardError('error code')
 ```
 
 ## Roadmap
