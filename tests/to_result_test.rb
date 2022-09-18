@@ -19,6 +19,11 @@ class ToResultTest < Minitest::Test
     assert ToResult { expected } == Success(expected)
   end
 
+  def test_exception
+    expected = StandardError.new(@value)
+    assert ToResult { raise expected } == Failure(expected)
+  end
+
   def test_yield_failure
     expected = Failure(@value)
     # this will raise a Dry::Monads::Do::Halt exception
