@@ -5,7 +5,7 @@ ToResult is a wrapper built over `dry-monads` to make the `Do Notation`, `Result
 
 ## Why I created ToResult
 
-`dry-monads` is full of edge cases that requires me to write boilerplates everytime I want a method to return a `Success` or `Failure`, for example:
+`dry-monads` is full of edge cases that requires to write boilerplate code everytime I want a method to return a `Success` or `Failure`, for example:
 
 ```ruby
 def my_method
@@ -38,7 +38,19 @@ def my_method
 end
 ```
 
-because it will raise a `Dry::Monads::Do::Halt` exception and the original exception will be forever lost if our code is not prepared to "unbox" the exception with `e.result`.
+and you cannot even use `yield` and `rescue` in the same method:
+
+```ruby
+def my_method
+  # this will raise a Dry::Monads::Do::Halt exception
+  yield Failure('error code')
+rescue StandardError => e
+  # e is an instance of Dry::Monads::Do::Halt
+  Failure(e)
+end
+```
+
+because they will raise a `Dry::Monads::Do::Halt` exception and the original exception will be forever lost if we do not "unbox" the exception with `e.result`.
 
 ## Usage
 
@@ -70,7 +82,23 @@ class MyClass
 end
 ```
 
-now you can always use `ToResult` all the time you wanted to use `Success`, `Failure` or `Try`, but with a more handy interface and consistent behaviour.
+now you can always use `ToResult` all the time you wanted to use `Success`, `Failure` or `Try` but with a more handy interface and consistent behaviour.
+
+Look at this:
+
+```ruby
+ToResult { raise StandardError.new('error code') }
+# returns Failure(StandardError('error code'))
+
+ToResult { yield Success('hello!') }
+# returns Success('hello!')
+
+ToResult { yield Failure('error code') }
+# returns Failure('error code')
+
+ToResult { yield Failure(StandardError.new('error code')) }
+# returns Failure(StandardError('error code'))
+```
 
 ## Roadmap
 I'm already planning to implement some useful features:
