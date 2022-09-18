@@ -1,7 +1,7 @@
 
 # ToResult
 
-ToResult is a wrapper built over `dry-monads` to make the `Do Notation`, `Result` and `Try` concepts more friendly and **ergonomic** to use, in particular to implement the **Railway Pattern**.
+ToResult is a wrapper built over `dry-monads` to make the `Do Notation`, `Result` and `Try` concepts more handy and consistent to use, in particular to implement the **Railway Pattern**.
 
 ## Why I created ToResult
 
@@ -70,7 +70,7 @@ class MyClass
 end
 ```
 
-now you can always use `ToResult` all the time you wanted to use `Success`, `Failure` or `Try`, but with a more handy interface and coherent behaviour.
+now you can always use `ToResult` all the time you wanted to use `Success`, `Failure` or `Try`, but with a more handy interface and consistent behaviour.
 
 ## Roadmap
 I'm already planning to implement some useful features:
