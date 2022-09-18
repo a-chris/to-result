@@ -30,9 +30,9 @@ But this is not the bigget problem, bear with me.
 
 One of the biggest problem is that we cannot use the `Do Notation` inside a `Try` block:
 ```ruby
+# this will return a Failure(Dry::Monads::Do::Halt)
 def my_method
   Try do
-    # this will raise a Dry::Monads::Do::Halt exception
     yield Failure('error code')
   end.to_result
 end
@@ -41,8 +41,8 @@ end
 and you cannot even use `yield` and `rescue` in the same method:
 
 ```ruby
+# this will return a Failure(Dry::Monads::Do::Halt)
 def my_method
-  # this will raise a Dry::Monads::Do::Halt exception
   yield Failure('error code')
 rescue StandardError => e
   # e is an instance of Dry::Monads::Do::Halt
