@@ -5,7 +5,7 @@ ToResult is a wrapper built over `dry-monads` to make the `Do Notation`, `Result
 
 ## Why I created ToResult
 
-`dry-monads` is full of edge cases that requires to write boilerplate code everytime I want a method to return a `Success` or `Failure`, for example:
+`dry-monads` is full of edge cases that require to write boilerplate code everytime I want a method to return a `Success` or `Failure`, for example:
 
 ```ruby
 def my_method
