@@ -52,10 +52,23 @@ end
 
 because they will raise a `Dry::Monads::Do::Halt` exception and the original exception will be forever lost if we do not "unbox" the exception with `e.result`.
 
+## Installation
+
+To install with bundler:
+```bash
+bundle add to-result
+```
+or with `gem`:
+```bash
+gem install to-result
+```
+
 ## Usage
 
 To use it with instances of a class, just include it
 ```ruby
+require 'to_result'
+
 class MyClass
   include ToResultMixin
 
@@ -69,6 +82,8 @@ end
 
 or if you want to use it with Singleton Classes:
 ```ruby
+require 'to_result'
+
 class MyClass
   extend ToResultMixin
 
