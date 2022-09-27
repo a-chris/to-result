@@ -1,13 +1,23 @@
 require 'minitest/autorun'
+require 'mocha/minitest'
 require 'byebug'
 
 require './lib/to_result'
+require './tests/support/fake_logger'
 
 class ToResultTest < Minitest::Test
   include ToResultMixin
 
   def setup
+    super
     @value = 'hello world!'
+  end
+
+  def teardown
+    super
+
+    # reset the configuration after each test
+    ToResultMixin.configure { |c| c = {} }
   end
 
   def test_string
@@ -44,5 +54,16 @@ class ToResultTest < Minitest::Test
     expected = Failure(StandardError.new(@value))
     # this will raise a Dry::Monads::Do::Halt exception
     assert ToResult { yield expected } == expected
+  end
+
+  def test_on_error
+    FakeLogger.expects(:log_error).once
+
+    ToResultMixin.configure do |c|
+      c[:on_error] = Proc.new { FakeLogger.log_error }
+    end
+
+
+    ToResult { raise StandardError.new(@value) }
   end
 end
