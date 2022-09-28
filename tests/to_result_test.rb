@@ -60,9 +60,8 @@ class ToResultTest < Minitest::Test
     FakeLogger.expects(:log_error).once
 
     ToResultMixin.configure do |c|
-      c[:on_error] = Proc.new { FakeLogger.log_error }
+      c.on_error = Proc.new { FakeLogger.log_error }
     end
-
 
     ToResult { raise StandardError.new(@value) }
   end

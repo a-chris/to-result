@@ -4,9 +4,9 @@ require 'ostruct'
 module ToResultMixin
   include Dry::Monads[:do, :result, :try]
 
-  @@configuration = OpenStruct.new(
-    on_error: nil
-  )
+  Configuration = Struct.new(:on_error)
+
+  @@configuration = Configuration.new(on_error: nil)
 
   #
   # Allow to override the @@configuration fields
