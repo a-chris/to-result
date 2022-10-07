@@ -12,6 +12,6 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/a-chris/to-result'
   s.license     = 'MIT'
 
-  spec.require_paths = ['lib']
-  spec.files    = `git ls-files`.split($INPUT_RECORD_SEPARATOR).reject { |f| (f == '.gitignore') || f =~ /^examples/ }
+  s.require_paths = ['lib']
+  s.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR).reject { |f| (f == '.gitignore') || f =~ /^examples/ }
 end
