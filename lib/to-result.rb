@@ -3,9 +3,11 @@ require 'dry/monads'
 module ToResultMixin
   include Dry::Monads[:do, :result, :try]
 
-  Configuration = Struct.new(:on_error)
+  class Configuration
+    attr_accessor :on_error
+  end
 
-  @@configuration = Configuration.new(on_error: nil)
+  @@configuration = Configuration.new
 
   #
   # Allow to override the @@configuration fields

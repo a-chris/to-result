@@ -59,10 +59,15 @@ class ToResultTest < Minitest::Test
   def test_on_error
     FakeLogger.expects(:log_error).once
 
-    ToResultMixin.configure do |c|
-      c.on_error = Proc.new { FakeLogger.log_error }
+    # creating a clean room just for testing purpose
+    clean_room = Class.new(Object)
+    clean_room.new.instance_eval do
+      ToResultMixin.configure do |c|
+        c.on_error = Proc.new { FakeLogger.log_error }
+      end
     end
 
-    ToResult { raise StandardError.new(@value) }
+    expected = StandardError.new(@value)
+    assert ToResult { raise expected } == Failure(expected)
   end
 end
