@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    to-result (0.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -19,6 +24,7 @@ DEPENDENCIES
   dry-monads (~> 1.4)
   minitest (~> 5.16)
   mocha (~> 1.15)
+  to-result!
 
 BUNDLED WITH
    2.3.15
