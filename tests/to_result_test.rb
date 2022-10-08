@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'mocha/minitest'
 require 'byebug'
 
-require './lib/to_result'
+require './lib/to-result'
 require './tests/support/fake_logger'
 
 class ToResultTest < Minitest::Test

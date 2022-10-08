@@ -123,9 +123,10 @@ ToResult([ArgumentError]) { yield Failure(YourCustomError.new('error code')) }
 
 ## Roadmap
 I'm already planning to implement some useful features:
+- [x] write more examples/documentation/tests
 - [ ] configurable error logging when an exception is catched inside `DoResult`
 e.g. sending the log to Airbrake or whathever service you are using
-- [ ] write more examples/documentation/tests
+- [ ] transform/process the catched error
 - [ ] any other suggestion would be appreciated 😁
 
 ## Authors

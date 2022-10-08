@@ -1,5 +1,4 @@
 require 'dry/monads'
-require 'ostruct'
 
 module ToResultMixin
   include Dry::Monads[:do, :result, :try]
