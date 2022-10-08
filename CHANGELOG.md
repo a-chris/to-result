@@ -1,4 +1,10 @@
 # Changelog
+## [0.0.4](https://github.com/a-chris/to-result/tree/0.0.4) (2022-10-08)
+
+- Adds a global `configuration` object for ToResult
+- Adds `on_error` field in `configuration` to execute a block every time a error is catched
+
+[Full Changelog](https://github.com/a-chris/to-result/compare/0.0.3...0.0.4)
 
 ## [0.0.3](https://github.com/a-chris/to-result/tree/0.0.3) (2022-10-08)
 

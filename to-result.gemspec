@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = 'to-result'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.summary     = 'A wrapper over dry-monads to offer a handy and consistent way to implement the Railway pattern.'
   s.description = 'A wrapper over dry-monads to offer a handy and consistent way to implement the Railway pattern.'
   s.authors     = ['Christian Toscano']
