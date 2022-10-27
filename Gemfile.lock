@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     to-result (0.0.4)
+      dry-monads (~> 1.5)
 
 GEM
   remote: https://rubygems.org/

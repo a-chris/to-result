@@ -14,4 +14,6 @@ Gem::Specification.new do |s|
 
   s.require_paths = ['lib']
   s.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR).reject { |f| (f == '.gitignore') || f =~ /^examples/ }
+
+  s.add_dependency 'dry-monads', '~> 1.5'
 end
