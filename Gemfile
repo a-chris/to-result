@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in pulsarcli.gemspec
 gemspec
 
-gem 'dry-monads', '~> 1.4'
+gem 'dry-monads', '~> 1.5'
 
 gem 'byebug', '~> 11.1'
 
