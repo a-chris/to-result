@@ -36,12 +36,12 @@ class ToResultTest < Minitest::Test
 
   def test_exception_included_in_exceptions_list
     expected = ArgumentError.new(@value)
-    assert ToResult([ArgumentError]) { raise expected } == Failure(expected)
+    assert ToResult(only: [ArgumentError]) { raise expected } == Failure(expected)
   end
 
   def test_exception_not_included_in_exceptions_list
     expected = NameError.new(@value)
-    assert_raises(NameError) { ToResult([ArgumentError]) { raise expected } }
+    assert_raises(NameError) { ToResult(only: [ArgumentError]) { raise expected } }
   end
 
   def test_yield_failure
@@ -56,9 +56,7 @@ class ToResultTest < Minitest::Test
     assert ToResult { yield expected } == expected
   end
 
-  def test_on_error
-    FakeLogger.expects(:log_error).once
-
+  def setup_global_on_error
     # creating a clean room just for testing purpose
     clean_room = Class.new(Object)
     clean_room.new.instance_eval do
@@ -66,8 +64,36 @@ class ToResultTest < Minitest::Test
         c.on_error = Proc.new { FakeLogger.log_error }
       end
     end
+  end
+
+  def test_global_on_error
+    setup_global_on_error
+
+    FakeLogger.expects(:log_error).once
 
     expected = StandardError.new(@value)
     assert ToResult { raise expected } == Failure(expected)
+  end
+
+  def test_local_on_error_overrides_global
+    setup_global_on_error
+
+    FakeLogger.expects(:log_error).once
+
+    local_on_error = Proc.new { FakeLogger.log_error }
+
+    expected = StandardError.new(@value)
+    assert ToResult(on_error: local_on_error) { raise expected } == Failure(expected)
+  end
+
+  def test_local_on_error_overrides_global_nil
+    setup_global_on_error
+
+    FakeLogger.expects(:log_error).never
+
+    local_on_error = nil
+
+    expected = StandardError.new(@value)
+    assert ToResult(on_error: local_on_error) { raise expected } == Failure(expected)
   end
 end
