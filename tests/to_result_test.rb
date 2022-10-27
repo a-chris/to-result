@@ -56,6 +56,12 @@ class ToResultTest < Minitest::Test
     assert ToResult { yield expected } == expected
   end
 
+  def test_invalid_global_on_error
+    assert_raises(TypeError) do
+      ToResultMixin.configure { |c| c.on_error = 'invalid value' }
+    end
+  end
+
   def setup_global_on_error
     # creating a clean room just for testing purpose
     clean_room = Class.new(Object)
@@ -94,6 +100,14 @@ class ToResultTest < Minitest::Test
     local_on_error = nil
 
     expected = StandardError.new(@value)
+    assert ToResult(on_error: local_on_error) { raise expected } == Failure(expected)
+  end
+
+  def test_local_on_error_without_global
+    local_on_error = Proc.new { |e| FakeLogger.return_error(e) }
+
+    expected = StandardError.new(@value)
+    FakeLogger.expects(:return_error).with(expected).returns(expected).once
     assert ToResult(on_error: local_on_error) { raise expected } == Failure(expected)
   end
 end
