@@ -144,6 +144,30 @@ ToResult(only: [ArgumentError]) { yield Failure(YourCustomError.new('error code'
 # raises YourCustomError('error code')
 ```
 
+## Local and global callback on errors
+to-result gives you the possibility to define a callback to be called when an error is raised inside the `ToResult` block, this is a handy place to log errors.
+
+You can define a global callback, usually defined into an initializer:
+
+```
+# initializers/to_result.rb
+
+ToResultMixin.configure do |c|
+  c.on_error = Proc.new { |e| Logger.log_error(e) }
+end
+```
+
+or a local callback:
+
+```
+ToResult(on_error: { |e| Logger.log_error(e) }) do
+  yield Failure(StandardError.new('error code'))
+end
+```
+
+you can even use both at the same time but keep in mind that **local callback overrides the global one**.
+
+
 ## Changelog
 
 [Changelog](CHANGELOG.md)
@@ -154,7 +178,7 @@ I'm already planning to implement some useful features:
 - [x] configurable error logging when an exception is catched inside `DoResult`
 e.g. sending the log to Airbrake or whathever service you are using
 - [x] transform/process the catched error => this can be handled with `alt_map` or other methods already available in `dry-monads`
-- [ ] any other suggestion would be appreciated 😁
+- [ ] any type of suggestion is appreciated 😁
 
 ## Authors
 
