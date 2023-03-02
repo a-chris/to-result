@@ -1,7 +1,7 @@
 
 # ToResult
 
-ToResult is a wrapper built over `dry-monads` to make the `Do Notation`, `Result` and `Try` concepts more handy and consistent to use, in particular to implement the **Railway Pattern**.
+ToResult is a wrapper built over `dry-monads` to make the `Do Notation`, `Result` and `Try` concepts more handy and consistent to use, especially to implement the **Railway Pattern**.
 
 ## Why I created ToResult
 
@@ -120,7 +120,7 @@ class MyClass
 end
 ```
 
-now you can always use `ToResult` all the time you wanted to use `Success`, `Failure` or `Try` but with a more convenient interface and consistent behaviour.
+now you can always use `ToResult` all the time you wanted to use `Try` or return `Success/Failure` but with a more convenient interface and consistent behaviour, my goal is to have a solution that can be used for every use-case.
 
 Look at this:
 
@@ -149,7 +149,7 @@ to-result gives you the possibility to define a callback to be called when an er
 
 You can define a global callback, usually defined into an initializer:
 
-```
+```ruby
 # initializers/to_result.rb
 
 ToResultMixin.configure do |c|
@@ -159,7 +159,7 @@ end
 
 or a local callback:
 
-```
+```ruby
 ToResult(on_error: { |e| Logger.log_error(e) }) do
   yield Failure(StandardError.new('error code'))
 end
