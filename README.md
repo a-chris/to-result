@@ -160,7 +160,7 @@ end
 or a local callback:
 
 ```ruby
-ToResult(on_error: { |e| Logger.log_error(e) }) do
+ToResult(on_error: proc { |e| Logger.log_error(e) }) do
   yield Failure(StandardError.new('error code'))
 end
 ```
