@@ -7,7 +7,7 @@ module ToResultMixin
     attr_accessor :on_error
 
     def on_error=(value)
-      raise TypeError.new('on_error is expected to be a callable object') unless value.respond_to?(:call)
+      raise TypeError, 'on_error is expected to be a callable object' unless value.respond_to?(:call)
 
       @on_error = value
     end
@@ -39,14 +39,14 @@ module ToResultMixin
   # @return [Success]
   # @return [Failure]
   #
-  def ToResult(only: [StandardError], **args, &f)
+  def ToResult(only: [StandardError], **args, &block)
     # on_error included in args so we can distinguish when it's passed but it's nil
     # from when it's not passed at all
     on_error ||= args.key?(:on_error) ? args[:on_error] : @@configuration.on_error
 
-    f_wrapper =
-      Proc.new do
-        f.call
+    block_wrapper =
+      proc do
+        block.call
       rescue Dry::Monads::Do::Halt => e
         failure = error = e.result
         error = error.failure if error.respond_to?(:failure)
@@ -57,6 +57,6 @@ module ToResultMixin
         raise e
       end
 
-    Try.run(only, f_wrapper).to_result
+    Try.run(only, block_wrapper).to_result
   end
 end
