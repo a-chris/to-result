@@ -180,6 +180,13 @@ e.g. sending the log to Airbrake or whathever service you are using
 - [x] transform/process the catched error => this can be handled with `alt_map` or other methods already available in `dry-monads`
 - [ ] any type of suggestion is appreciated 😁
 
+## Relasing a new version
+
+```
+  gem build to-result
+  gem push to-result-<version>.gem
+```
+
 ## Authors
 
 - [@a-chris](https://www.github.com/a-chris)
