@@ -48,9 +48,8 @@ module ToResultMixin
       proc do
         block.call
       rescue Dry::Monads::Do::Halt => e
-        failure = error = e.result
-        error = error.failure if error.respond_to?(:failure)
-        on_error.call(error) if on_error.respond_to?(:call)
+        failure = e.result
+        on_error.call(failure.failure) if on_error.respond_to?(:call)
 
         return failure
       rescue *only => e
