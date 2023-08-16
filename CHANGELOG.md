@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.1](https://github.com/a-chris/to-result/tree/0.1.1) (2023-08-16)
+
+HOTFIXES:
+
+- Always pass the error to the `on_error` callable object instead of mixed `error/Failure(error)`
+
 ## [0.1.0](https://github.com/a-chris/to-result/tree/0.1.0) (2022-10-28)
 
 - Explicit requires `dry-monads` >= 1.x, just for convenience
