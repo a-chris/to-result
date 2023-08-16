@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/a-chris/to-result/tree/0.2.0) (2023-08-16)
+
+IMPROVEMENTS:
+
+- Using RSpec instead of Minitest for testing
+- Minor code cleanup
+
 ## [0.1.1](https://github.com/a-chris/to-result/tree/0.1.1) (2023-08-16)
 
 HOTFIXES:
