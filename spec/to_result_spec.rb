@@ -44,6 +44,14 @@ RSpec.describe ToResultMixin do
       # it equals to ToResult { yield expected }
       expect(FakeObject.raise_do_halt_error(expected)).to eq(expected)
     end
+
+    it 'returns Failure with the original error and stacktrace' do
+      expected  = StandardError.new(value)
+      result    = ToResult { raise expected }
+
+      expect(result).to eq(Failure(expected))
+      # expect(result.failure)
+    end
   end
 
   describe 'on_error' do

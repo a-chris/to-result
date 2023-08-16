@@ -51,10 +51,12 @@ module ToResultMixin
         failure = error = e.result
         error = error.failure if error.respond_to?(:failure)
         on_error.call(error) if on_error.respond_to?(:call)
+
         return failure
       rescue *only => e
         on_error.call(e) if on_error.respond_to?(:call)
-        raise e
+
+        return Failure(e)
       end
 
     Try.run(only, block_wrapper).to_result
